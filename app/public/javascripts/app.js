@@ -242,6 +242,7 @@ app.controller('MainController', ["$scope", "$http", "$window", function ($scope
     $scope.editProduct = function(product){
         let _id = product._id;
         let name = product.name;
+        product.price = parseFloat(product.price);
         let price = product.price;
         let query = `
             mutation ProductObject($_id: String!, $name: String, $price: Float!){
@@ -431,6 +432,7 @@ app.controller('MainController', ["$scope", "$http", "$window", function ($scope
         $scope.cart.line_items.forEach(function(line_item){
             total += line_item.total;
         });
+        total = parseFloat(total.toFixed(2));
         $scope.cart.total = total;
     }
 

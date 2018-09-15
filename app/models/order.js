@@ -19,7 +19,7 @@ OrderSchema.pre('save', async function (next) {
             total += line_item.total;
         });
     }
-    this.total = total;
+    this.total = parseFloat(total.toFixed(2));
 
     next();
 });

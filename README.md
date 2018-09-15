@@ -35,4 +35,13 @@ Run the app
 npm run dev
 ```
 
-You can now find the app by going to localhost:8080
+That's it! Checkout the app on localhost:8080
+
+##API
+
+The app's api is build with graphql.  [Graphiql](https://github.com/graphql/graphiql) is enabled by default, you can make all api calls and queries from here.
+I've split the api into four sections:
+* Shop - http://localhost:8080/graphql/shop
+* Order - http://localhost:8080/graphql/order
+* Product - http://localhost:8080/graphql/product
+* LineItem - http://localhost:8080/graphql/line_item

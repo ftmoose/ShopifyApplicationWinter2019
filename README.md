@@ -46,7 +46,7 @@ mongorestore -d <custom name> shopify
 Move into the repository and install all dependencies
 
 ```
-cd ../ShopifyApplicationWinter2019/app/
+cd ../app/
 npm install
 npm audit fix
 ```
@@ -78,9 +78,13 @@ I've split the api into four sections:
 * Product - http://localhost:8080/graphql/product
 * LineItem - http://localhost:8080/graphql/line_item
 
-You mush be on and object's corresponding link to query it.
+You must be on and object's corresponding link to query it.
+
+*Disclaimer: All example data is from the data seed files I have included in this repo, they will not work on the live version deployed through GKE*
 
 ### Shops
+
+http://localhost:8080/graphql/shop
 
 Here is what the shop schema looks like: 
 
@@ -114,13 +118,13 @@ query ShopObject($name: String){
         name
         info
         products
-         orders
+        orders
     }
 }
 
 Variables:
 {
-    "name": "Willy Wonka's Chocolate Factory"
+    "name": "Music Store"
 }
 ```
 
@@ -129,11 +133,14 @@ Variables:
 Here is a list of Shops included in the MongoDB seed file:
 
 ```
-Shop names here
+* Music Store
+* Grocery Store
 ```
 
 
 ### Orders
+
+http://localhost:8080/graphql/order
 
 Here is what the order schema looks like:
 
@@ -174,17 +181,20 @@ query OrderObject($_id: String!){
 
 Varables:
 {
-    "_id": "<ID>"
+    "_id": "5b9d78592f14806525f00c21"
 }
 ```
 
 Here is a list of order ids included in the MongoDB seed file:
 
 ```
-Put order ids here
+* 5b9d78592f14806525f00c21
+* 5b9d7a4d3f03e3659f2f892c
 ```
 
 ### Products
+
+http://localhost:8080/graphql/product
 
 Here is what the order schema looks like:
 
@@ -235,10 +245,18 @@ Variables:
 Here is a list of products included in the MongoDB seed file:
 
 ```
-Put product names here
+* Hip Hop Mixtape
+* Mozart: Complete Works
+* K-pop
+* Apples
+* Oranges
+* Kiwi
+* Watermelon
 ```
 
 ### Line Items
+
+http://localhost:8080/graphql/line_item
 
 Here is what the line item schema looks like:
 
@@ -285,7 +303,10 @@ Variables:
 Here is a list of line item ids included in the MongoDB seed file:
 
 ```
-Put line items here
+* 5b9d78592f14806525f00c1f
+* 5b9d78592f14806525f00c20
+* 5b9d7a4d3f03e3659f2f892a
+* 5b9d7a4d3f03e3659f2f892b
 ```
 
 

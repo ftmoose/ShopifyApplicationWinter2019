@@ -4,7 +4,9 @@
 
 ## Getting Started
 
-Follow these instructions to get a copy of my project running on your local machine
+Follow these instructions to get a copy of my project running on your local machine.
+
+Or checkout a live version deployed with [Docker](https://www.docker.com/) and [Kubernetes](https://github.com/kubernetes/kubernetes) on [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine/) [here](http://35.237.111.74/)
 
 ### Prerequisites
 
@@ -21,10 +23,24 @@ Start by cloning the repo into a directory of your choice
 git clone https://github.com/rammom/ShopifyApplicationWinter2019.git
 ```
 
+I've made a seed data folder for you to easily populate your local mongodb database. If you don't want to upload this data you can skip this step.
+
+```
+cd ./datadump
+mongorestore -d shopify shopify
+```
+
+Or if you want to use a custom database name:
+
+```
+cd ./datadump
+mongorestore -d <custom name> shopify
+```
+
 Move into the repository and install all dependencies
 
 ```
-cd ShopifyApplicationWinter2019/app/
+cd ../ShopifyApplicationWinter2019/app/
 npm install
 npm audit fix
 ```
@@ -35,13 +51,12 @@ Run the app
 npm run dev
 ```
 
-If you want to run the app with a custom database name (default database is *shopify*), do this
+Or if you want to run the app with a custom database name (default database is *shopify*), do this
+*Note: If you chose to use a custom database name while restoring the data, you must do this step*
 
 ```
 DB_NAME=<custom name> npm run dev
 ```
-
-
 
 That's it! Checkout the app on http://localhost:8080
 

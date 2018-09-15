@@ -3,6 +3,7 @@ var { buildSchema } = require('graphql');
 var Shop = require('../models/shop.js');
 var Order = require('../models/order.js');
 var Product = require('../models/product.js');
+var LineItem = require('../models/line_item');
 
 var shopSchema = buildSchema(`
 
@@ -120,10 +121,18 @@ var shopRoot = {
 		// delete all shop's orders
 		let orders = shop.orders.slice();
 		for (var i = 0; i < orders.length; i++){
-			await Order.remove({ _id: shop.orders[i] }, function(err, amt) {
-				console.log(amt);
-			});
+			await Order.remove({ _id: shop.orders[i] });
 		}
+		// delete all shop's line_items
+		shop.products.forEach(async function(product){
+			await LineItem.remove({product: product});
+		});
+		// delete all shop's products
+		let products = shop.products.slice();
+		for (var i = 0; i < products.length; i++) {
+			await Product.remove({ _id: shop.products[i] });
+		}
+
 		// delete shop
 		var deleted = false;
 		await Shop.remove({ _id: shop._id }, function(err, amt){

@@ -49,6 +49,50 @@ I've split the api into four sections:
 
 You mush be on and object's corresponding link to query it.
 
+### Shops
+
+Here is what the shop schema looks like: 
+
+```
+type ShopObject {
+    _id: String!
+    name: String!
+    info: String!
+    products: [String]!
+    orders: [String]!
+}
+
+type Query {
+    getShop(_id: String!): ShopObject
+    getShopsByName(name: String): [ShopObject]
+}
+
+type Mutation {
+    createShop(name: String!, info: String!): ShopObject
+    updateShop(_id: String!, name: String, info: String): ShopObject
+    deleteShop(_id: String!): Boolean
+}
+```
+
+An example of a query would be:
+
+```
+query ShopObject($name: String!){
+    getShopsByName(name: $name){
+        _id
+        name
+        info
+        products
+        orders
+    }
+}
+
+Variables:
+{
+  "name": "Willy Wonka's Chocolate Factory"
+}
+```
+
 ### Orders
 
 Here is what the order schema looks like:
@@ -73,3 +117,53 @@ type Mutation {
     refundOrder(_id: String!): OrderObject
 }
 ```
+
+An example of a query would be:
+
+```
+query OrderObject($_id: String!){
+    getOrderById(_id: $_id){
+      _id
+      date
+      shop
+      line_items
+      total
+      refunded
+    }
+}
+
+Varables:
+{
+    "_id": "5b9d5ac313fd625d55b493e0"
+}
+```
+
+Here is a list of order ids included in the MongoDB seed file:
+
+```
+Put order ids here
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

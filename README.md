@@ -35,13 +35,41 @@ Run the app
 npm run dev
 ```
 
-That's it! Checkout the app on localhost:8080
+That's it! Checkout the app on http://localhost:8080
 
-##API
+## API
 
 The app's api is build with graphql.  [Graphiql](https://github.com/graphql/graphiql) is enabled by default, you can make all api calls and queries from here.
+
 I've split the api into four sections:
 * Shop - http://localhost:8080/graphql/shop
 * Order - http://localhost:8080/graphql/order
 * Product - http://localhost:8080/graphql/product
 * LineItem - http://localhost:8080/graphql/line_item
+
+You mush be on and object's corresponding link to query it.
+
+### Orders
+
+Here is what the order schema looks like:
+
+```
+type OrderObject {
+    _id: String!
+    date: String!
+    shop: String!
+    line_items: [String]!
+    total: Float!
+    refunded: Boolean!
+}
+
+type Query {
+    getOrderById(_id: String!): OrderObject
+    getOrdersByShopId(shopId: String): [OrderObject]
+}
+
+type Mutation {
+    createOrder(shopId: String!, line_items: [String]!): OrderObject
+    refundOrder(_id: String!): OrderObject
+}
+```

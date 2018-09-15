@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Moose's Shopify Store</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Angular -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+        <script src="./javascripts/app.js"></script>
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    </head>
+    <body ng-controller="MainController" class="myContainer">
+        <div class="row" style="padding-top: 1vh; padding-bottom: 1vh">
+            <div class="col-sm-12" style="text-align: center">
+                <h4 class="align-middle" style="display: inline;margin-right: 1rem">Mostapha's Shopify Project</h4>
+                <img src="./images/shopify-logo.png" alt="Shopify Logo" style="max-width: 3em; display: inline;">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12" style="text-align: center">
+                <!-- Shop List Options -->
+                <div class="ShopListOptions">
+                    <button class="btn btn-outline-primary" data-toggle="modal" data-target="#addshopModal">Add Shop</button>
+                    <!-- Add Shop Modal -->
+                    <div class="modal fade" id="addshopModal" tabindex="-1" role="dialog" aria-labelledby="addshopModal" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Add new shop.</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="form-group">
+                                            <label for="newShopName">Name</label>
+                                            <input type="text" class="form-control" id="newShopName" ng-model="newShop.name" placeholder="Willy Wonka's Chocolate Factory" name="name" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="newShopInfo">Description</label>
+                                            <textarea type="text" class="form-control" id="newShopInfo" ng-model="newShop.info" placeholder="Providing jobs for stuggling Oompa Loompas" name="info" required></textarea>
+                                        </div>
+                                        <button class="btn btn-primary" ng-click="createNewShop()" data-dismiss="modal">Create shop</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <small ng-show="shops.length == 0">No shops created :(</small>
+                <!-- Shops -->
+                <div class="List ShopList">
+                    <div class="card" style="min-width: 18rem; display: inline-block;" ng-repeat="shop in shops">
+                        <div class="card-body">
+                            <h5 class="card-title">{{shop.name}}</h5>
+                            <p class="card-text">{{shop.info}}</p>
+                            <button class="btn btn-primary btn-sm" ng-click="switchShop(shop)">Go to shop</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!-- Shop View -->
+            <div class="col-sm-12 col-md-8 ShopView">
+                <small ng-show="!currentShop">No shop selected!</small>
+                <div ng-show="currentShop">
+                    <div class="shopInfo">
+                        <h3 style="float: left;">{{currentShop.name}}</h3>
+                        <button class="btn btn-outline-danger shopOptionButtons" data-toggle="modal" data-target="#deleteshopModal">Delete Shop</button>
+                        <button class="btn btn-outline-primary shopOptionButtons" data-toggle="modal" data-target="#editShopModal">Edit Shop</button>
+                        <button class="btn btn-primary shopOptionButtons" data-toggle="modal" data-target="#addProductModal">Add Product</button>
+                        <br><br>
+                        <p style="float: left;">{{currentShop.info}}</p>
+                        <!-- add product modal -->
+                        <div class="modal fade" id="addProductModal" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5>Create a new product.</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body ">
+                                        <form>
+                                            <div class="form-group">
+                                                <label for="newProductName">Product Name</label>
+                                                <input type="text" class="form-control" id="newProductName" placeholder="Flying Car" name="name" ng-model="newProduct.name" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="newProductPrice">Price</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">$</span>
+                                                    </div>
+                                                    <input type="text" class="form-control" id="newProductPrice" placeholder="1,000,000.00" name="price" ng-model="newProduct.price" required>
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-primary" id="createNewProductButton" data-dismiss="modal" ng-click="createNewProduct(currentShop._id)">Create Product</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- edit shop modal -->
+                        <div class="modal fade" id="editShopModal" tabindex="-1" role="dialog" aria-labelledby="editShopModal" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Edit shop.</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="form-group">
+                                                <label for="newShopName">Name</label>
+                                                <input type="text" class="form-control" id="newShopName" ng-model="currentShop.name" placeholder="Willy Wonka's Chocolate Factory" name="name" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="newShopInfo">Description</label>
+                                                <textarea type="text" class="form-control" id="newShopInfo" ng-model="currentShop.info" placeholder="Providing jobs for stuggling Oompa Loompas" name="info" required></textarea>
+                                            </div>
+                                            <button class="btn btn-primary" ng-click="editShop()" data-dismiss="modal">Save edit</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- delete warning modal -->
+                    <div class="modal fade" id="deleteshopModal" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Are you sure you want to delete this shop forever?</h5>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <form>
+                                        <button class="btn btn-danger" ng-click="deleteShop(currentShop._id)" data-dismiss="modal">Delete</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Products -->
+                    <div class="shopProducts">
+                        <h4>Products</h4>
+                        <small ng-show="currentShop.products.length == 0">This shop currently has no products.</small>
+                        <div class="List ProductList">
+                            <div class="card border-dark" style="display: inline-block;" ng-repeat="product in currentShop.products">
+                                <div class="card-body">
+                                    <h5 class="card-title" style="display: inline">{{product.name}}</h5>
+                                    <span class="productInfo" data-toggle="modal" data-target="#productInfoModal{{product._id}}" ng-click="setCurrentProduct(product)">&#9432;</span>
+                                    <p class="card-text">${{product.price}}</p>
+                                    <button class="btn btn-primary btn-sm" ng-click="addProductToCart(product)">Add to cart</button>
+                                    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editProductModal{{product._id}}">Edit product</button>
+                                    <button class="btn btn-danger btn-sm" ng-click="archiveProduct(product._id)" ng-show="!product.archived">Archive</button>
+                                    <button class="btn btn-info btn-sm" ng-click="unarchiveProduct(product._id)" ng-show="product.archived" >Unarchive</button>
+                                    <!-- Previous Purchases Modal -->
+                                    <div class="modal fade" id="productInfoModal{{product._id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Previous Purchases</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h4>{{ product.name }}</h4>
+                                                    <div class="List OrderList">
+                                                        <div class="card border-dark" style="display: inline-block;" ng-repeat="line_item in currentProduct.line_items">
+                                                            <div class="card-body">
+                                                                <h5 class="card-title">{{line_item.order.date.substring(0,24)}}</h5>
+                                                                <p class="card-text">${{ product.price }} &times; {{ line_item.qty }} unit(s)</p>
+
+                                                                <button class="btn btn-secondary btn-sm" ng-show="line_item.order.refunded" disabled>Refunded</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <small ng-show="currentProduct.line_items == 0">This product has never been ordered.</small>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <div style="position:absolute;left:1rem;"><small>{{product._id}}</small></div>
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- edit product modal -->
+                                    <div class="modal fade" id="editProductModal{{product._id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5>Edit product.</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body ">
+                                                    <form>
+                                                        <div class="form-group">
+                                                            <label for="editProductName">Product Name</label>
+                                                            <input type="text" class="form-control" id="editProductName" placeholder="Flying Car" name="name"
+                                                                ng-model="product.name" required>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="editProductPrice">Price</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">$</span>
+                                                                </div>
+                                                                <input type="text" class="form-control" id="editProductPrice"
+                                                                    name="price" ng-model="product.price" required>
+                                                            </div>
+                                                        </div>
+                                                        <button class="btn btn-primary" id="editProductButton" data-dismiss="modal" ng-click="editProduct(product)">Save edit</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Orders -->
+                    <div class="shopOrders">
+                        <h4>Orders</h4>
+                        <small ng-show="currentShop.orders.length == 0">This shop currently has no orders.</small>
+                        <div class="List OrderList">
+                            <div class="card border-dark" style="display: inline-block;" ng-repeat="order in currentShop.orders">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{order.date.substring(0,24)}}</h5>
+                                    <p class="card-text">${{order.total}}</p>
+                                    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#viewOrderModal{{order._id}}" ng-click="setCurrentOrder(order)">View</button>
+                                    <button class="btn btn-danger btn-sm" ng-show="!order.refunded" ng-click="refundOrder(order._id)">Refund</button>
+                                    <button class="btn btn-secondary btn-sm" ng-show="order.refunded" disabled>Refunded</button>
+                                    
+                                    <!-- View Order Modal -->
+                                    <div class="modal fade" id="viewOrderModal{{order._id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Receipt.</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h5>{{ currentShop.name }}</h5>
+                                                    <h6 style="font-weight:300">{{order.date}}</h6>
+                                                    <div class="CartStack">
+                                                        <div class="card border-info" ng-repeat="line_item in currentOrder.line_items">
+                                                            <div class="card-body">
+                                                                <h5 class="card-title">{{ line_item.product.name }}</h5>
+                                                                <p class="card-text">${{ line_item.product.price }} &times; {{ line_item.qty }} unit(s)</p>
+                                                                <b>
+                                                                    <p class="card-text" style="margin-bottom: 10px;">${{line_item.total}}</p>
+                                                                </b>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <h5>Total: ${{currentOrder.total}}</h5>
+                                                    <button class="btn btn-secondary btn-sm" ng-show="currentOrder.refunded" disabled>Refunded</button>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <div style="position:absolute;left:1rem;"><small>{{order._id}}</small></div>
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- Cart View -->
+            <div class="col-sm-12 col-md-4 CartView">
+                <h3>Cart</h3>
+                <small ng-show="cart.line_items.length == 0">Nothing in cart.</small>
+                <div class="CartStack">
+                    <div class="card border-info" ng-repeat="line_item in cart.line_items">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ line_item.product.name }}</h5>
+                            <p class="card-text">${{ line_item.product.price }} &times; {{ line_item.qty }} unit(s)</p>
+                            <b><p class="card-text" style="margin-bottom: 10px;">Total: ${{line_item.total}}</p></b>
+                            <button class="btn btn-danger btn-sm" ng-click="removeUnitFromCart(line_item.product._id)">Remove one unit</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="CartSummary" ng-show="cart.line_items.length > 0">
+                    <h5 style="display: inline; float:left;">Cart Total: ${{cart.total}}</h5>
+                    <button class="btn btn-warning" style="float: right" data-toggle="modal" data-target="#orderConfirmModal">Order</button>
+                    <!-- order confirm modal -->
+                    <div class="modal fade" id="orderConfirmModal" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Confirm Order.</h5>
+                                </div>
+                                <div class="modal-body">
+                                    <h5 style="display: inline; float:left;">Cart Total: ${{cart.total}}</h5>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <form>
+                                        <button class="btn btn-warning" ng-click="completeOrder()" data-dismiss="modal">Order</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+
+<style>
+    body {
+        background-color: rgb(255, 252, 247);
+    }
+    .productInfo{
+        text-align: right;
+        display: inline;
+        cursor: pointer;
+    }
+    .card-text{
+        overflow: hidden;
+        white-space:nowrap; 
+        text-overflow: ellipsis;
+    }
+    .myContainer {
+        margin-left: 5vw;
+        margin-right: 5vw;
+    }
+    .List{
+        overflow-x: scroll;
+        overflow-y: hidden;
+        white-space: nowrap;
+    }
+    .ShopList {
+        border-bottom: 2px solid black;
+        min-height: 8vh;
+    }
+    .CartStack {
+        overflow-x: hidden;
+        overflow-y: scroll;
+        white-space: nowrap;
+        max-height: 50vh;
+    }
+    .CartSummary {
+        padding-left: 1vw;
+        padding-right: 1vw;
+        padding-top: 1vw;
+    }
+    .ShopListOptions {
+        padding-top: 5px;
+    }
+    .ShopView {
+        text-align: center;
+        margin-top: 3vh;
+    }
+    .CartView {
+        text-align: center;
+        margin-top: 3vh;
+        border-left: 2px solid black;
+    }
+    .shopOptionButtons {
+        float: right;
+        margin-right: 5px;
+    }
+    .shopProducts {
+        margin-top: 5vh;
+    }
+    .card {
+        margin: 1vh;
+    }
+</style>

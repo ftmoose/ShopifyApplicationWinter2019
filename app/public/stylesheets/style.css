@@ -1,0 +1,16 @@
+html {
+  height: 100vh;
+}
+
+.shop-card {
+  display: inline-block;
+  margin: 1vw
+}
+
+.page-title {
+  margin-top: 3vh;
+}
+
+.shop-container {
+  margin-top: 5vh;
+}

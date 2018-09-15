@@ -1,0 +1,15 @@
+UPDATING TO NEW IMAGE
+current version: 5.3
+
+Step 1: Build new docker image
+
+docker build -t gcr.io/testkubernetes-216421/shopify-app:<VERISON> .
+
+Step 2: Push image to google cloud
+
+gcloud docker -- push gcr.io/testkubernetes-216421/shopify-app:<VERISON>
+
+Step 3: Update existing deployment image
+
+kubectl set image deployment/shopify-web shopify-web=gcr.io/testkubernetes-216421/shopify-app:<VERISON>
+

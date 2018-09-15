@@ -1,6 +1,9 @@
 # 2018 Shopify Intern Application Challenge
 
-!!! Intro paragraph goes here !!!
+### Contents
+* [Installing](#Installing)
+* Interfacing with the API
+* Tests
 
 ## Getting Started
 

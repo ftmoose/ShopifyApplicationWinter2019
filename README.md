@@ -77,21 +77,30 @@ type Mutation {
 An example of a query would be:
 
 ```
-query ShopObject($name: String!){
+query ShopObject($name: String){
     getShopsByName(name: $name){
         _id
         name
         info
         products
-        orders
+         orders
     }
 }
 
 Variables:
 {
-  "name": "Willy Wonka's Chocolate Factory"
+    "name": "Willy Wonka's Chocolate Factory"
 }
 ```
+
+*Note: To get all the shops you can run the query above with no name*
+
+Here is a list of Shops included in the MongoDB seed file:
+
+```
+Shop names here
+```
+
 
 ### Orders
 
@@ -134,7 +143,7 @@ query OrderObject($_id: String!){
 
 Varables:
 {
-    "_id": "5b9d5ac313fd625d55b493e0"
+    "_id": "<ID>"
 }
 ```
 
@@ -143,6 +152,112 @@ Here is a list of order ids included in the MongoDB seed file:
 ```
 Put order ids here
 ```
+
+### Products
+
+Here is what the order schema looks like:
+
+```
+type ProductObject {
+    _id: String!
+    name: String!
+    price: Float!
+    line_items: [String]!
+    archived: Boolean
+}
+
+type Query {
+    getProductById(_id: String!): ProductObject
+    getProductsByName(name: String): [ProductObject]
+}
+
+type Mutation {
+    createProduct(name: String!, price: Float!, shopId: String): ProductObject
+    updateProduct(_id: String!, name: String, price: Float): ProductObject
+    archiveProduct(_id: String!): ProductObject
+    unarchiveProduct(_id: String!): ProductObject
+    deleteProduct(_id: String!, verification: Boolean!): Boolean
+}
+```
+
+An example of a query would be:
+
+```
+query ProductObject($name: String!){
+    getProductsByName(name: $name){
+        _id
+        name
+        price
+        line_items
+        archived
+    }
+}
+
+Variables:
+{
+    "name": "Chocolate Bar"
+}
+```
+
+*Note: To get all the products you can run the query above with no name*
+
+Here is a list of products included in the MongoDB seed file:
+
+```
+Put product names here
+```
+
+### Line Items
+
+Here is what the line item schema looks like:
+
+```
+type LineItemObject {
+    _id: String!
+    product: String!
+    qty: Int!
+    total: Float!
+}
+
+type Query {
+    getLineItemById(_id: String!): LineItemObject
+    getLineItemsByProductId(productId: String): [LineItemObject]
+}
+
+type Mutation {
+    createLineItem(productId: String!, qty: Int!): LineItemObject
+    createLineItems(productIds: [String]!, qtys: [Int]!): [LineItemObject]
+    updateLineItem(_id: String!, qty: Int): LineItemObject
+    deleteLineItem(_id: String!): Boolean
+}
+```
+
+An example of a query would be:
+
+```
+query LineItemObject($_id: String!){
+    getLineItemById(_id: $_id){
+        _id
+        product
+        qty
+        total
+    }
+}
+
+
+Variables:
+{
+  "_id": "<ID>"
+}
+```
+
+Here is a list of line item ids included in the MongoDB seed file:
+
+```
+Put line items here
+```
+
+
 
 
 

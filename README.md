@@ -17,11 +17,15 @@ For this to work you'll need to have the following installed:
 ### Installing
 *Before starting make sure you have mongodb running on localhost.*
 
+#### Cloning
+
 Start by cloning the repo into a directory of your choice
 
 ```
 git clone https://github.com/rammom/ShopifyApplicationWinter2019.git
 ```
+
+#### Populating database
 
 I've made a seed data folder for you to easily populate your local mongodb database. If you don't want to upload this data you can skip this step.
 
@@ -37,6 +41,8 @@ cd ./datadump
 mongorestore -d <custom name> shopify
 ```
 
+#### Installing dependencies
+
 Move into the repository and install all dependencies
 
 ```
@@ -44,6 +50,8 @@ cd ../ShopifyApplicationWinter2019/app/
 npm install
 npm audit fix
 ```
+
+#### Last step
 
 Run the app
 

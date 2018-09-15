@@ -2,8 +2,8 @@
 
 ### Contents
 * [Installing](#installing)
-* Interfacing with the API
-* Tests
+* [Interfacing with the API](#api)
+* [Tests](#tests)
 
 ## Getting Started
 
@@ -312,14 +312,17 @@ Here is a list of line item ids included in the MongoDB seed file:
 * 5b9d7a4d3f03e3659f2f892b
 ```
 
+## Tests
 
+I've written several tests during the development process, running them is simple.
 
+*Note: Make sure you have the app running with a database connection*
 
+```
+npm run test
+```
 
-
-
-
-
+They should all run successfully.
 
 
 

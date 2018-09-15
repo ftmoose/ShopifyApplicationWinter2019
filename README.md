@@ -35,6 +35,14 @@ Run the app
 npm run dev
 ```
 
+If you want to run the app with a custom database name (default database is *shopify*), do this
+
+```
+DB_NAME=<custom name> npm run dev
+```
+
+
+
 That's it! Checkout the app on http://localhost:8080
 
 ## API

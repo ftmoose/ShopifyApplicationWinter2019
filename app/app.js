@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var graphqlHTTP = require('express-graphql');
 var mongoose = require('mongoose');
-let db_name = (process.env.DB_NAME) ? process.env.DB : 'shopify';
+let db_name = (process.env.DB_NAME) ? process.env.DB_NAME : 'shopify';
 let db_path =  (process.env.MONGO_SERVICE_HOST && process.env.MONGO_SERVICE_PORT)
 		? 'mongodb://' + process.env.MONGO_SERVICE_HOST + ':' + process.env.MONGO_SERVICE_PORT + '/' + db_name
 		: 'mongodb://localhost:27017/' + db_name;

@@ -399,7 +399,7 @@ app.controller('MainController', ["$scope", "$http", "$window", function ($scope
         $scope.cart.line_items.forEach(function(line_item){
             if (line_item.product._id == product._id){
                 line_item.qty++;
-                line_item.total = line_item.qty * product.price;
+                line_item.total = parseFloat((line_item.qty * product.price).toFixed(2));
                 updated = true;
             }
         });
@@ -408,7 +408,7 @@ app.controller('MainController', ["$scope", "$http", "$window", function ($scope
             $scope.cart.line_items.unshift({
                 product: product,
                 qty: 1,
-                total: product.price
+                total: parseFloat(product.price.toFixed(2))
             });
         }
         $scope.adjustCartTotal();

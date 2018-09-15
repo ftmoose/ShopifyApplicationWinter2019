@@ -12,7 +12,7 @@ var LineItemSchema = new Schema({
 LineItemSchema.pre('save', function(next) {
     var outerThis = this;
     Product.findOne({_id: this.product}, function(err, product){
-        outerThis.total = outerThis.qty * product.price;
+        outerThis.total = parseFloat((outerThis.qty * product.price).toFixed(2));
         next();
     });
 

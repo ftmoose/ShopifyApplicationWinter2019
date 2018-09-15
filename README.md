@@ -6,7 +6,7 @@
 
 Follow these instructions to get a copy of my project running on your local machine.
 
-Or click [here](http://35.237.111.74/) checkout a live version deployed with [Docker](https://www.docker.com/) and [Kubernetes](https://github.com/kubernetes/kubernetes) on [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine/) 
+Or click [here](http://35.237.111.74/) to checkout a live version deployed with [Docker](https://www.docker.com/) and [Kubernetes](https://github.com/kubernetes/kubernetes) on [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine/) 
 
 ### Prerequisites
 

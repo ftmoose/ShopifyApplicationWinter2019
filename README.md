@@ -1,7 +1,7 @@
 # 2018 Shopify Intern Application Challenge
 
 ### Contents
-* [Installing](#Installing)
+* [Installing](#installing)
 * Interfacing with the API
 * Tests
 

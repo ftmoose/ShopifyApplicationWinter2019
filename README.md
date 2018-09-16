@@ -73,7 +73,8 @@ That's it! Checkout the app on http://localhost:8080
 
 ## API
 
-The app's api is build with graphql.  [Graphiql](https://github.com/graphql/graphiql) is enabled by default, you can make all api calls and queries from here.
+The app's api is build with graphql.  [Graphiql](https://github.com/graphql/graphiql) is enabled by default, you can make all api calls and queries from there.
+Alternatively, you can use the application's UI by hitting the storefront on http://localhost:8080/
 
 I've split the api into four sections:
 * Shop - http://localhost:8080/graphql/shop

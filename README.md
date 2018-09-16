@@ -27,7 +27,7 @@ For this to work you'll need to have the following installed:
     * [Install guide for Windows](https://treehouse.github.io/installation-guides/windows/mongo-windows.html)
 
 ### Installing
-*Before starting make sure you have mongodb running on localhost.*
+*Before starting make sure you have mongodb running on localhost:27017.*
 
 #### Cloning
 

@@ -30,7 +30,7 @@ For this to work you'll need to have the following installed:
 
 *This install guide is tailored towards Mac users, some steps may vary on Windows or Linux*
 
-***Before** starting make sure you have mongodb running on localhost:27017.*
+***Before starting** make sure you have mongodb running on localhost:27017.*
 
 
 #### Cloning

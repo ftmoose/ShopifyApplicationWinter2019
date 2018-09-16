@@ -1,8 +1,13 @@
 # 2018 Shopify Intern Application Challenge
 
 ### Contents
+* [Prerequisites](#prerequisites)
 * [Installing](#installing)
 * [Interfacing with the API](#api)
+    * [Shops](#shops)
+    * [Orders](#orders)
+    * [Products](#products)
+    * [Line Items](#line-items)
 * [Tests](#tests)
 
 ## Getting Started

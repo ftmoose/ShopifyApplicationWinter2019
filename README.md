@@ -23,6 +23,8 @@ Or click [here](http://35.237.111.74/) to checkout a **live version** deployed w
 For this to work you'll need to have the following installed:
 * [NodeJS (npm)](https://nodejs.org/en/download/) - NPM is a package manager for NodeJS, it comes preinstalled with NodeJS
 * [MongoDB](https://docs.mongodb.com/manual/installation/) - No-SQL, document-oriented database program
+    * [Install guide for MacOS](https://treehouse.github.io/installation-guides/mac/mongo-mac.html)
+    * [Install guide for Windows](https://treehouse.github.io/installation-guides/windows/mongo-windows.html)
 
 ### Installing
 *Before starting make sure you have mongodb running on localhost.*

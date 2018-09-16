@@ -1,7 +1,8 @@
 var mongoose = require('mongoose');
 var { buildSchema } = require('graphql');
 var Order = require('../models/order.js');
-var Shop = require('../models/shop.js')
+var Shop = require('../models/shop.js');
+var LineItem = require('../models/line_item.js');
 
 var orderSchema = buildSchema(`
 
@@ -72,13 +73,24 @@ var orderRoot = {
     },
     createOrder: async ({ shopId, line_items }) => {
         // build new mongo Order object
-        let order = new Order({
+        var order = new Order({
             date: new Date(),
             shop: shopId,
             line_items: line_items,
             total: 0,
             refunded: false
         });
+        // create order total
+        for (let i = 0; i < line_items.length; i++){
+            let line_item = line_items[i];
+            await LineItem.find({_id: line_item}, function (err, lis){
+                for (let j = 0; j < lis.length; j++){
+                    let li = lis[j]
+                    order.total += li.total;
+                }
+            });
+        }
+        console.log("order.total2"+order.total);
         // save to DB
         await order.save();
         // add order to shop

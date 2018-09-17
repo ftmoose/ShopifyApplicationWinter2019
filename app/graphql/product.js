@@ -3,7 +3,6 @@ var { buildSchema } = require('graphql');
 var Product = require('../models/product.js');
 var Shop = require('../models/shop.js');
 
-// Construct a schema, using GraphQL schema language
 var productSchema = buildSchema(`
 
   type ProductObject {
@@ -28,7 +27,6 @@ var productSchema = buildSchema(`
   }
 `);
 
-// If Message had any complex fields, we'd put them on this object.
 class ProductObject {
     constructor(id, { name, price }) {
         this._id = id;

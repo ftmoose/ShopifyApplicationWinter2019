@@ -64,7 +64,6 @@ Move into the repository and install all dependencies
 ```
 cd ../app/
 npm install
-npm audit fix
 ```
 
 #### Last step

@@ -5,7 +5,7 @@ const should = chai.should();
 
 const Product = require('../models/line_item.js');
 
-const url = `http://localhost:4000`;
+const url = `http://localhost:8080`;
 const request = require('supertest')(url);
 
 var globalScope = {

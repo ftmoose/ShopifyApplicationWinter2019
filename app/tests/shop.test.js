@@ -3,7 +3,7 @@ const expect = chai.expect;
 const assert = chai.assert;
 const should = chai.should();
 
-const url = `http://localhost:4000`;
+const url = `http://localhost:8080`;
 const request = require('supertest')(url);
 
 var globalScope = {

@@ -121,9 +121,14 @@ app.controller('MainController', ["$scope", "$http", "$window", function ($scope
         $scope.currentOrder = o;
         // resolve line items
         for (var i = 0; i < $scope.currentOrder.line_items.length; i++) {
+            console.log($scope.currentOrder.line_items[0])
             $scope.line_items.forEach(function (line_item) {
-                if ($scope.currentOrder.line_items[i] == line_item._id){
+                let liID;
+                if ($scope.currentOrder.line_items[i]._id) liID = $scope.currentOrder.line_items[i]._id;
+                else liID = $scope.currentOrder.line_items[i];
+                if (liID == line_item._id){
                     $scope.currentOrder.line_items[i] = line_item;
+                    console.log($scope.currentOrder);
                     // resolve product
                     $scope.products.forEach(function(product){
                         if (product._id == $scope.currentOrder.line_items[i].product)

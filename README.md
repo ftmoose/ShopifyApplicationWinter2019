@@ -1,4 +1,4 @@
-# 2018 Shopify Intern Application Challenge
+# 2019 Shopify Intern Application Challenge
 
 ### Contents
 * [Prerequisites](#prerequisites)

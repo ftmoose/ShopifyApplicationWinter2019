@@ -246,6 +246,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title">{{order.date.substring(0,24)}}</h5>
                                     <p class="card-text">${{order.total}}</p>
+                                    <p class="card-text" style="margin-bottom: 10px;" ng-show="order.total == 0">(This is a problem that only happens on live..)</p>
                                     <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#viewOrderModal{{order._id}}" ng-click="setCurrentOrder(order)">View</button>
                                     <button class="btn btn-danger btn-sm" ng-show="!order.refunded" ng-click="refundOrder(order._id)">Refund</button>
                                     <button class="btn btn-secondary btn-sm" ng-show="order.refunded" disabled>Refunded</button>

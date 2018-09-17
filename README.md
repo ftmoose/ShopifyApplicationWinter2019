@@ -341,7 +341,7 @@ They should all run successfully.
 
 ## Known Issues
 
-* There is an issue with order total's showing up as $0 only on the deployed version of the app.  I suspect this has to do with some loss of connection between 
+* There is an intermittent issue only present on the deployed version of the app. Sometimes an order total will show up as $0.  I suspect this has to do with some loss of connection between 
 the app and mongodb.
 
 

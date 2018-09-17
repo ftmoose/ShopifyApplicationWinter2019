@@ -344,7 +344,6 @@ They should all run successfully.
 * There is an issue with order total's showing up as $0 only on the deployed version of the app.  I suspect this has to do with some loss of connection between 
 the app and mongodb.
 
-* After creating an order, there is an issue with the frontend code that doesn't show you the items in the order straight away.  You need to refresh the page.
 
 
 

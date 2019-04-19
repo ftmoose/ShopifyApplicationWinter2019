@@ -1,7 +1,5 @@
 # 2019 Shopify Intern Application Challenge
 
-![Demo Image](shopify.png)
-
 ### Contents
 * [Prerequisites](#prerequisites)
 * [Installing](#installing)
@@ -12,6 +10,8 @@
     * [Line Items](#line-items)
 * [Tests](#tests)
 * [Known Issues](#known-issues)
+
+![Demo Image](shopify.png)
 
 ## Getting Started
 

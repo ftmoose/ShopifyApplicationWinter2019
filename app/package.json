@@ -16,7 +16,7 @@
     "express-graphql": "^0.6.12",
     "graphql": "^14.0.2",
     "mocha": "^5.2.0",
-    "mongoose": "^5.2.14",
+    "mongoose": "^5.7.5",
     "morgan": "^1.9.1",
     "nodemon": "^1.18.4",
     "serve-favicon": "^2.5.0",

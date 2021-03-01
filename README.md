@@ -9,7 +9,6 @@
     * [Products](#products)
     * [Line Items](#line-items)
 * [Tests](#tests)
-* [Known Issues](#known-issues)
 
 ![Demo Image](shopify.png)
 
@@ -339,12 +338,6 @@ npm run test
 ```
 
 They should all run successfully.
-
-
-## Known Issues
-
-* There is an intermittent issue only present on the deployed version of the app. Sometimes an order total will show up as $0.  I suspect this has to do with some loss of connection between 
-the app and mongodb.
 
 
 
